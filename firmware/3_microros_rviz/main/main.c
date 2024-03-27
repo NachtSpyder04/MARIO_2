@@ -33,29 +33,6 @@
 #define FRAME_TIME 100 // 1000 / FRAME_TIME = FPS
 #define SLEEP_TIME 10
 
-// PINS
-#define LED_BUILTIN 33
-#define PIN_LEFT_FORWARD 12
-#define PIN_LEFT_BACKWARD 13
-#define PIN_RIGHT_FORWARD 15
-#define PIN_RIGHT_BACKWARD 14
-
-// PWM Channels (Reserve channel 0 and 1 for camera)
-#define PWM_LEFT_FORWARD LEDC_CHANNEL_2
-#define PWM_LEFT_BACKWARD LEDC_CHANNEL_3
-#define PWM_RIGHT_FORWARD LEDC_CHANNEL_4
-#define PWM_RIGHT_BACKWARD LEDC_CHANNEL_5
-
-// Other PWM settings
-#define PWM_FREQUENCY 50
-#define PWM_RESOLUTION LEDC_TIMER_12_BIT
-#define PWM_TIMER LEDC_TIMER_1
-#define PWM_MODE LEDC_HIGH_SPEED_MODE
-
-// These values are determined by experiment and are unique to every robot
-#define PWM_MOTOR_MIN 750    // The value where the motor starts moving
-#define PWM_MOTOR_MAX 4095   // Full speed (2^12 - 1)
-
 #define TAG_RVIZ "MICROROS_RVIZ"
 #define pi 3.141592653589
 
@@ -103,7 +80,6 @@ servo_config servo_d = {
 };
 
 // Function forward declarations
-void setupPins();
 void setupRos();
 void cmd_vel_callback(const void *msgin);
 void timer_callback(rcl_timer_t *timer, int64_t last_call_time);
@@ -111,7 +87,6 @@ float fmap(float val, float in_min, float in_max, float out_min, float out_max);
 
 void micro_ros_task(void * arg)
 {
-   setupPins();
    setupRos(); 
 }
 
@@ -206,7 +181,6 @@ for ex:  float linear = msg.linear.x;
 */
 void timer_callback(rcl_timer_t *timer, int64_t last_call_time) {
 
-    gpio_set_level(LED_BUILTIN, !gpio_get_level(LED_BUILTIN));
     if (timer == NULL) {
         return;
     }
