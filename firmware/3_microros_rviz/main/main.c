@@ -8,7 +8,7 @@
 #include <rcl/error_handling.h>
 #include <rclc/rclc.h>
 #include <rclc/executor.h>
-#include <geometry_msgs/msg/twist.h>
+#include <geometry_msgs/msg/pose.h>
 
 #include <driver/gpio.h>
 #include <driver/ledc.h>
@@ -37,7 +37,7 @@
 #define pi 3.141592653589
 
 
-geometry_msgs__msg__Twist msg;
+geometry_msgs__msg__Pose msg;
 
 servo_config servo_a = {
 	.servo_pin = SERVO_A,
@@ -81,7 +81,7 @@ servo_config servo_d = {
 
 // Function forward declarations
 void setupRos();
-void cmd_vel_callback(const void *msgin);
+void joint_states_callback(const void *msgin);
 void timer_callback(rcl_timer_t *timer, int64_t last_call_time);
 float fmap(float val, float in_min, float in_max, float out_min, float out_max);
 
@@ -149,7 +149,7 @@ void setupRos() {
     // create executor
     rclc_executor_t executor;
     RCCHECK(rclc_executor_init(&executor, &support.context, 2, &allocator));
-    RCCHECK(rclc_executor_add_subscription(&executor, &subscriber, &msg, &cmd_vel_callback, ON_NEW_DATA));
+    RCCHECK(rclc_executor_add_subscription(&executor, &subscriber, &msg, &joint_states_callback, ON_NEW_DATA));
     RCCHECK(rclc_executor_add_timer(&executor, &timer));
 
     while (1) {
