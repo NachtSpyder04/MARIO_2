@@ -12,7 +12,7 @@
 
 #include <driver/gpio.h>
 #include <driver/ledc.h>
-
+    
 #include <rmw_microros/rmw_microros.h>
 
 #include "sra_board.h"
@@ -166,7 +166,7 @@ void setupRos() {
 
 // We don't really need the callback, because msg is set anyway
 void joint_states_callback(const void *msgin) {
-//    const geometry_msgs__msg__Twist *msg = (const geometry_msgs__msg__Twist *) msgin;
+//    const geometry_msgs__msg__Pose *msg = (const geometry_msgs__msg__Pose *) msgin;
 //    printf("Message received: %f %f\n", msg->linear.x, msg->angular.z);
 }
 
@@ -193,10 +193,10 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time) {
     ESP_LOGD(TAG_RVIZ, "angle [ELBOW]:    %f", msg.position[2]);
     ESP_LOGD(TAG_RVIZ, "angle [GRIPPER]:    %f", msg.position[3]);
 
-    set_angle_servo(&servo_a,msg.position[0]*180/pi);
-    set_angle_servo(&servo_b,msg.position[1]*180/pi);
-    set_angle_servo(&servo_c,msg.position[2]*180/pi);
-    set_angle_servo(&servo_d,msg.position[3]*180/pi);
+    set_angle_servo(&servo_a,msg.position[0]);
+    set_angle_servo(&servo_b,msg.position[1]);
+    set_angle_servo(&servo_c,msg.position[2]);
+    set_angle_servo(&servo_d,msg.position[3]);
 
     vTaskDelay(5);
 
