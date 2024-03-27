@@ -168,23 +168,8 @@ void setupRos() {
 void joint_states_callback(const void *msgin) {
 //    const geometry_msgs__msg__Pose *msg = (const geometry_msgs__msg__Pose *) msgin;
 //    printf("Message received: %f %f\n", msg->linear.x, msg->angular.z);
-}
 
-// Each frame, check msg data and set PWM channels accordingly
-
-/*
-IMPLEMENT YOUR LOGIC IN THIS timer_callback FUNCTION. 
-BY DEFAULT THIS WILL RUN IN INFINITE WHILE LOOP.
-ACCES THE DATA FROM TOPIC(ON WHICH YOU PUBLISHED).
-for ex:  float linear = msg.linear.x;
-         int angular = msg.angular.z; 
-*/
-void timer_callback(const void *msgin) {
-
-    if (timer == NULL) {
-        return;
-    }
-    sensor_msgs__msg__Jointstate *msg = (const sensor__msgs__msg__Jointstate *)msgin;
+     sensor_msgs__msg__Jointstate *msg = (const sensor__msgs__msg__Jointstate *)msgin;
 
     ESP_LOGD(TAG_RVIZ, "%s", "new message from publisher");
 
@@ -200,8 +185,25 @@ void timer_callback(const void *msgin) {
     set_angle_servo(&servo_d,msg->position.data[3]);
 
     vTaskDelay(5);
-
 }
+
+// Each frame, check msg data and set PWM channels accordingly
+
+/*
+IMPLEMENT YOUR LOGIC IN THIS timer_callback FUNCTION. 
+BY DEFAULT THIS WILL RUN IN INFINITE WHILE LOOP.
+ACCES THE DATA FROM TOPIC(ON WHICH YOU PUBLISHED).
+for ex:  float linear = msg.linear.x;
+         int angular = msg.angular.z; 
+*/
+// void timer_callback(const void *msgin) {
+
+//     // if (timer == NULL) {
+//     //     return;
+//     // }
+   
+
+// }
 
 
 // Helper functions
