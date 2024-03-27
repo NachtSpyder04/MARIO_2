@@ -29,8 +29,7 @@ rcl_subscription_t subscriber;
 sensor_msgs__msg__JointState recv_msg;
 char test_array[ARRAY_LEN];
 
-// Functions to set up servo configurations
-
+// structs to set up servo configurations
 servo_config servo_a = {
 	.servo_pin = SERVO_A,
 	.min_pulse_width = CONFIG_SERVO_A_MIN_PULSEWIDTH,
@@ -75,11 +74,11 @@ servo_config servo_d = {
 // Callback function defined by user, automatically called whenever new message arrives on subscribed topic 
 void subscription_callback(const void * msgin)
 {
-	printf("Hey I was called but not used\n");
-	const sensor_msgs__msg__JointState * msg = (const sensor_msgs__msg__JointState *)msgin;
+     printf("Hey I was called but not used\n");
+     const sensor_msgs__msg__JointState * msg = (const sensor_msgs__msg__JointState *)msgin;
     
     //To display data on terminal
-	printf("Received: %lf\n",  msg->position.data[0]);
+    printf("Received: %lf\n",  msg->position.data[0]);
     printf("Received: %lf\n",  msg->position.data[1]);
     printf("Received: %lf\n",  msg->position.data[2]);
     printf("Received: %lf\n",  msg->position.data[3]);
