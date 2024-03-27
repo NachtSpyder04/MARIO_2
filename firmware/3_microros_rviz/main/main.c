@@ -131,62 +131,6 @@ void app_main(void)
             NULL);
 }
 
-void setupPins() {
-
-    // Led. Set it to GPIO_MODE_INPUT_OUTPUT, because we want to read back the state we set it to.
-    gpio_reset_pin(LED_BUILTIN);
-    gpio_set_direction(LED_BUILTIN, GPIO_MODE_INPUT_OUTPUT);
-
-    // Configure timer
-    ledc_timer_config_t ledc_timer = {
-        .duty_resolution = PWM_RESOLUTION,
-        .freq_hz = PWM_FREQUENCY,
-        .speed_mode = PWM_MODE,
-        .timer_num = PWM_TIMER,
-        .clk_cfg = LEDC_AUTO_CLK,
-    };
-    ledc_timer_config(&ledc_timer);
-
-    // Configure 4 PWM channels and assign output pins
-    ledc_channel_config_t ledc_channel[4] = {
-        {
-            .channel    = PWM_LEFT_FORWARD,
-            .duty       = 0,
-            .gpio_num   = PIN_LEFT_FORWARD,
-            .speed_mode = PWM_MODE,
-            .hpoint     = 0,
-            .timer_sel  = LEDC_TIMER_1
-        },
-        {
-            .channel    = PWM_LEFT_BACKWARD,
-            .duty       = 0,
-            .gpio_num   = PIN_LEFT_BACKWARD,
-            .speed_mode = PWM_MODE,
-            .hpoint     = 0,
-            .timer_sel  = LEDC_TIMER_1
-        },
-        {
-            .channel    = PWM_RIGHT_FORWARD,
-            .duty       = 0,
-            .gpio_num   = PIN_RIGHT_FORWARD,
-            .speed_mode = PWM_MODE,
-            .hpoint     = 0,
-            .timer_sel  = LEDC_TIMER_1
-        },
-        {
-            .channel    = PWM_RIGHT_BACKWARD,
-            .duty       = 0,
-            .gpio_num   = PIN_RIGHT_BACKWARD,
-            .speed_mode = PWM_MODE,
-            .hpoint     = 0,
-            .timer_sel  = LEDC_TIMER_1
-        },
-    };
-
-    for (int i = 0; i < 4; i++) {
-        ledc_channel_config(&ledc_channel[i]);
-    }
-}
 void setupRos() {
     // Micro ROS
       printf("Angular");
@@ -217,7 +161,7 @@ void setupRos() {
         &subscriber,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist),
-        "/cmd_vel")); //Subscribe topic here on which you are publishing
+        "/joint_states")); //Subscribe topic here on which you are publishing
 
     // create timer,
     rcl_timer_t timer;
@@ -246,7 +190,7 @@ void setupRos() {
 }
 
 // We don't really need the callback, because msg is set anyway
-void cmd_vel_callback(const void *msgin) {
+void joint_states_callback(const void *msgin) {
 //    const geometry_msgs__msg__Twist *msg = (const geometry_msgs__msg__Twist *) msgin;
 //    printf("Message received: %f %f\n", msg->linear.x, msg->angular.z);
 }
