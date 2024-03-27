@@ -135,7 +135,7 @@ void setupRos() {
     RCCHECK(rclc_subscription_init_default(
         &subscriber,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Pose),
         "/joint_states")); //Subscribe topic here on which you are publishing
 
     // create timer,
