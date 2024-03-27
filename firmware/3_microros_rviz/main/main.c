@@ -9,7 +9,7 @@
 #include <rclc/rclc.h>
 #include <rclc/executor.h>
 #include <geometry_msgs/msg/pose.h>
-#include "sensor_msgs/JointState.h"
+#include <sensor_msgs/msg/joint_state.h>
 #include <driver/gpio.h>
 #include <driver/ledc.h>
     
@@ -37,7 +37,7 @@
 #define pi 3.141592653589
 
 
-sensor_msgs_Joint_state msg;
+// sensor_msgs__msg__Jointstate msg;
 
 servo_config servo_a = {
 	.servo_pin = SERVO_A,
@@ -90,7 +90,7 @@ void micro_ros_task(void * arg)
    setupRos(); 
 }
 
-void app_main(void)
+void app_main(void) 
 {
 #if defined(CONFIG_MICRO_ROS_ESP_NETIF_WLAN) || defined(CONFIG_MICRO_ROS_ESP_NETIF_ENET)
     ESP_ERROR_CHECK(uros_network_interface_initialize());
@@ -135,7 +135,7 @@ void setupRos() {
     RCCHECK(rclc_subscription_init_default(
         &subscriber,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Pose),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor__msgs, msg, joint_state),
         "/joint_states")); //Subscribe topic here on which you are publishing
 
     // create timer,
@@ -179,24 +179,25 @@ ACCES THE DATA FROM TOPIC(ON WHICH YOU PUBLISHED).
 for ex:  float linear = msg.linear.x;
          int angular = msg.angular.z; 
 */
-void timer_callback(rcl_timer_t *timer, int64_t last_call_time) {
+void timer_callback(const void *msgin) {
 
     if (timer == NULL) {
         return;
     }
+    sensor_msgs__msg__Jointstate *msg = (const sensor__msgs__msg__Jointstate *)msgin;
 
     ESP_LOGD(TAG_RVIZ, "%s", "new message from publisher");
 
-    ESP_LOGD(TAG_RVIZ, "timestamp:        %d", msg.header.seq);
-    ESP_LOGD(TAG_RVIZ, "angle [BASE}:     %f", msg.position[0]);
-    ESP_LOGD(TAG_RVIZ, "angle [SHOUDLER]: %f", msg.position[1]);
-    ESP_LOGD(TAG_RVIZ, "angle [ELBOW]:    %f", msg.position[2]);
-    ESP_LOGD(TAG_RVIZ, "angle [GRIPPER]:    %f", msg.position[3]);
+    ESP_LOGD(TAG_RVIZ, "timestamp:        %d", msg->header->seq);
+    ESP_LOGD(TAG_RVIZ, "angle [BASE}:     %f", msg->position.data[0]);
+    ESP_LOGD(TAG_RVIZ, "angle [SHOUDLER]: %f", msg->position.data[1]);
+    ESP_LOGD(TAG_RVIZ, "angle [ELBOW]:    %f", msg->position.data[2]);
+    ESP_LOGD(TAG_RVIZ, "angle [GRIPPER]:    %f", msg->position.data[3]);
 
-    set_angle_servo(&servo_a,msg.position[0]);
-    set_angle_servo(&servo_b,msg.position[1]);
-    set_angle_servo(&servo_c,msg.position[2]);
-    set_angle_servo(&servo_d,msg.position[3]);
+    set_angle_servo(&servo_a,msg->position.data[0]);
+    set_angle_servo(&servo_b,msg->position.data[1]);
+    set_angle_servo(&servo_c,msg->position.data[2]);
+    set_angle_servo(&servo_d,msg->position.data[3]);
 
     vTaskDelay(5);
 
