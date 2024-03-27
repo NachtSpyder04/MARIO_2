@@ -9,7 +9,7 @@
 #include <rclc/rclc.h>
 #include <rclc/executor.h>
 #include <geometry_msgs/msg/pose.h>
-
+#include "sensor_msgs/JointState.h"
 #include <driver/gpio.h>
 #include <driver/ledc.h>
     
@@ -37,7 +37,7 @@
 #define pi 3.141592653589
 
 
-geometry_msgs__msg__Pose msg;
+sensor_msgs_Joint_state msg;
 
 servo_config servo_a = {
 	.servo_pin = SERVO_A,
