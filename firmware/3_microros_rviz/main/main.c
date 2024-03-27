@@ -18,16 +18,18 @@
 #include <rmw_microros/rmw_microros.h>
 #endif
 
+//defined macros
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Aborting.\n",__LINE__,(int)temp_rc);vTaskDelete(NULL);}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Continuing.\n",__LINE__,(int)temp_rc);}}
-
 #define ARRAY_LEN 200
 #define JOINT_DOUBLE_LEN 5
 
+//Declaring variables with their respective data types
 rcl_subscription_t subscriber;
 sensor_msgs__msg__JointState recv_msg;
-
 char test_array[ARRAY_LEN];
+
+// Functions to set up servo configurations
 
 servo_config servo_a = {
 	.servo_pin = SERVO_A,
@@ -69,14 +71,20 @@ servo_config servo_d = {
 	.gen = MCPWM_OPR_B,
 };
 
+
+// Callback function defined by user, automatically called whenever new message arrives on subscribed topic 
 void subscription_callback(const void * msgin)
 {
 	printf("Hey I was called but not used\n");
 	const sensor_msgs__msg__JointState * msg = (const sensor_msgs__msg__JointState *)msgin;
+    
+    //To display data on terminal
 	printf("Received: %lf\n",  msg->position.data[0]);
     printf("Received: %lf\n",  msg->position.data[1]);
     printf("Received: %lf\n",  msg->position.data[2]);
     printf("Received: %lf\n",  msg->position.data[3]);
+
+    //To control motors according to the data
     set_angle_servo(&servo_a,msg->position.data[0]);
     set_angle_servo(&servo_b,msg->position.data[1]);
     set_angle_servo(&servo_c,msg->position.data[2]);
@@ -85,7 +93,7 @@ void subscription_callback(const void * msgin)
 
 void micro_ros_task(void * arg)
 {
-	
+	//Initialization 
   	memset(test_array,'z',ARRAY_LEN);
 	rcl_allocator_t allocator = rcl_get_default_allocator();
 	rclc_support_t support;
