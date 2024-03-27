@@ -6,7 +6,7 @@
 #include "freertos/task.h"
 #include "esp_log.h"
 #include "esp_system.h"
-
+#include "sra_board.h"
 #include <uros_network_interfaces.h>
 #include <rcl/rcl.h>
 #include <rcl/error_handling.h>
@@ -28,6 +28,46 @@ rcl_subscription_t subscriber;
 sensor_msgs__msg__JointState recv_msg;
 
 char test_array[ARRAY_LEN];
+
+servo_config servo_a = {
+	.servo_pin = SERVO_A,
+	.min_pulse_width = CONFIG_SERVO_A_MIN_PULSEWIDTH,
+	.max_pulse_width = CONFIG_SERVO_A_MAX_PULSEWIDTH,
+	.max_degree = CONFIG_SERVO_A_MAX_DEGREE,
+	.mcpwm_num = MCPWM_UNIT_0,
+	.timer_num = MCPWM_TIMER_0,
+	.gen = MCPWM_OPR_A,
+};
+
+servo_config servo_b = {
+	.servo_pin = SERVO_B,
+	.min_pulse_width = CONFIG_SERVO_B_MIN_PULSEWIDTH,
+	.max_pulse_width = CONFIG_SERVO_B_MAX_PULSEWIDTH,
+	.max_degree = CONFIG_SERVO_B_MAX_DEGREE,
+	.mcpwm_num = MCPWM_UNIT_0,
+	.timer_num = MCPWM_TIMER_0,
+	.gen = MCPWM_OPR_B,
+};
+
+servo_config servo_c = {
+	.servo_pin = SERVO_C,
+	.min_pulse_width = CONFIG_SERVO_C_MIN_PULSEWIDTH,
+	.max_pulse_width = CONFIG_SERVO_C_MAX_PULSEWIDTH,
+	.max_degree = CONFIG_SERVO_C_MAX_DEGREE,
+	.mcpwm_num = MCPWM_UNIT_0,
+	.timer_num = MCPWM_TIMER_1,
+	.gen = MCPWM_OPR_A,
+};
+
+servo_config servo_d = {
+	.servo_pin = SERVO_D,
+	.min_pulse_width = CONFIG_SERVO_D_MIN_PULSEWIDTH,
+	.max_pulse_width = CONFIG_SERVO_D_MAX_PULSEWIDTH,
+	.max_degree = CONFIG_SERVO_D_MAX_DEGREE,
+	.mcpwm_num = MCPWM_UNIT_0,
+	.timer_num = MCPWM_TIMER_1,
+	.gen = MCPWM_OPR_B,
+};
 
 void subscription_callback(const void * msgin)
 {
