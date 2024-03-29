@@ -76,7 +76,7 @@ servo_config servo_d = {
 // Callback function defined by user, automatically called whenever new message arrives on subscribed topic 
 void subscription_callback(const void * msgin)
 {
-     printf("Hey I was called but not used\n");
+    
      const sensor_msgs__msg__JointState * msg = (const sensor_msgs__msg__JointState *)msgin;
     
     //To display data on terminal
