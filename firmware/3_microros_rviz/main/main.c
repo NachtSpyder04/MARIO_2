@@ -18,6 +18,8 @@
 #include <rmw_microros/rmw_microros.h>
 #endif
 
+#define pi 3.141592653589
+
 //defined macros
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Aborting.\n",__LINE__,(int)temp_rc);vTaskDelete(NULL);}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Continuing.\n",__LINE__,(int)temp_rc);}}
@@ -84,10 +86,10 @@ void subscription_callback(const void * msgin)
     printf("Received: %lf\n",  msg->position.data[3]);
 
     //To control motors according to the data
-    set_angle_servo(&servo_a,msg->position.data[0]);
-    set_angle_servo(&servo_b,msg->position.data[1]);
-    set_angle_servo(&servo_c,msg->position.data[2]);
-    set_angle_servo(&servo_d,msg->position.data[3]);
+    set_angle_servo(&servo_a,msg->position.data[0]*180/pi);
+    set_angle_servo(&servo_b,msg->position.data[1]*180/pi);
+    set_angle_servo(&servo_c,msg->position.data[2]*180/pi);
+    set_angle_servo(&servo_d,msg->position.data[3]*180/pi);
 }
 
 void micro_ros_task(void * arg)
