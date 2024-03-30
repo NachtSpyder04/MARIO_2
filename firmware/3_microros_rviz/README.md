@@ -18,7 +18,7 @@ ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
 
 
 * Open another terminal and source the ESP-IDF environment
-    * ``` cd firmware/3_microros_rviz ```
+    * ``` cd MARIO/firmware/3_microros_rviz ```
     * ```$IDF_PATH/export.sh``` (or ```get_idf``` if you have set up the alias in your `.bashrc` file)
     
 * Configure the micro-ROS settings 
@@ -33,18 +33,20 @@ sudo apt install net-tools
 
 * Build and Flash the code 
     * ```idf.py build```
-    * ```idf.py -p PORT flash```
+    * ```idf.py -p PORT flash``` (For example: ```idf.py -p /dev/ttyUSB0 flash``` )
 
 
 
 
-* In another terminal, Source the ROS2 environment and Start the Publisher by executing the relevant python script:
+* In another terminal, Navigate to the ROS2 workspace and Start the Publisher by executing the relevant python script after sourcing the environment
+(Make sure you have previously built the folder by executing `colcon build` command with 3_simulation_rviz in the src folder):
 
 ```bash
-source /opt/ros/humble/setup.bash
-cd 3_simulation_rviz/
-python3 rviz.py
+cd ros2_ws/
+source install/setup.bash
+ros2 run simulation_rviz rviz.py
 ```
+
 
 **Note**:- If it shows the error that script is not executable, run the following command in the directory where the script is present.
 
