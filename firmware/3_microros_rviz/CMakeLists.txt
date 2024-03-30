@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-set(EXTRA_COMPONENT_DIRS "${EXTRA_COMPONENT_DIRS}" "./../components/micro_ros_espidf_component" "../components/sra-board-component")
+set(EXTRA_COMPONENT_DIRS "${EXTRA_COMPONENT_DIRS}" "./../components")
 # Append the directories to the EXTRA_COMPONENT_DIRS variable
-list(APPEND EXTRA_COMPONENT_DIRS "./../components/micro_ros_espidf_component" "../components/sra-board-component")
+
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(ros_control_rviz)
 
