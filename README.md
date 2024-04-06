@@ -1,4 +1,5 @@
-# MARIO WORKSHOP 2.2
+# MARIO WORKSHOP 2.3
+
 *MARIO* abbreviation for *Manipulator on ROS Based Input Output* is a bot with 3 Degree of Freedom. It consists of two SG90 micro servo and one MG995 metal gear servo motor. The servo motors are placed on base, elbow and shoulder enabling it with 3 Degrees of Freedom.
 
 ## Sneek Peek 
@@ -17,20 +18,20 @@
 
 
 ## File Structure 
-    ├── 1_chatter_listener            # talker and listener script to understand the nodes and communications in ROS
-    ├── 2_simulation_dh               # simulation of DH paramteres
-    ├── 3_simulation_rviz             # simulation of MARIO bot on rviz
-    ├── 4_simulation_gazebo           # simulation of MARIO bot on gazebo
-    ├── assets                        # contains necessary gifs, images 
-    ├── firmware                      # contains ESP-IDF examples for controlling servo motors and rosserial
-    │   ├── 1_servo_set_zero          # example in ESP-IDF to set angles of all servo motor zero
-    │   ├── 2_servo_sweep             # example in ESP-IDF to set variable angles in servo motor
-    │   ├── 3_rosserial_rviz          # example in ESP-IDF to interface with rviz environment as well as ESP32
-    │   ├── 4_rosserial_gazebo        # example in ESP-IDF to interface with gazebo environment as well as ESP32
-    │   ├── 5_servo_test_webserver    # example in ESP-IDF to set angles of servo over the webserver interface
-    │   └── components                # contains all the dependencies required for the above examples
-    │       ├── rosserial_esp32       # rosserial library to setup interface between ros environment and ESP32
-    │       └── sra-board-component   # library to interface with SRA board
+    ├── 1_chatter_listener                        # talker and listener script to understand the nodes and communications in ROS
+    ├── 2_simulation_dh                           # simulation of DH paramteres
+    ├── 3_simulation_rviz                         # simulation of MARIO bot on rviz
+    ├── 4_simulation_gazebo                       # simulation of MARIO bot on gazebo
+    ├── assets                                    # contains necessary gifs, images 
+    ├── firmware                                  # contains ESP-IDF examples for controlling servo motors and micro-ROS
+    │   ├── 1_servo_set_zero                      # example in ESP-IDF to set angles of all servo motor zero
+    │   ├── 2_servo_sweep                         # example in ESP-IDF to set variable angles in servo motor
+    │   ├── 3_microros_rviz                       # example in ESP-IDF to interface with rviz environment as well as ESP32
+    │   ├── 4_microros_gazebo                     # example in ESP-IDF to interface with gazebo environment as well as ESP32
+    │   ├── 5_servo_test_webserver                # example in ESP-IDF to set angles of servo over the webserver interface
+    │   └── components                            # contains all the dependencies required for the above examples
+    │       ├── micro_ros_espidf_component        # library to interface between micro-ROS environment and ESP32
+    │       └── sra-board-component               # library to interface with SRA board
     ├── LICENSE
     └── README.md 
 
@@ -50,17 +51,23 @@ This system, which is often referred as the message broker brings the two partie
 
 While ROS works on the same system, this system is also used in various other libraries like MQTT.
 
-## ESPIDF
+## ESP-IDF
 ESP-IDF is the development framework for Espressif SoCs.The [SRA Board](https://github.com/SRA-VJTI/sra-board-hardware-design) uses ESP32 as microcontroller, hence ESPIDF is required
 to code the ESP32. Examples included inside firmware directory has been written in ESPIDF version 4.2 .
 
-## ROSSERIAL
-ROS Serial is a point-to-point version of ROS communications over serial, primarily for integrating low-cost microcontrollers (Arduino) into ROS. 
-ROS serial consists of a general p2p protocol, libraries for use with Arduino, and nodes for the PC/Tablet side (currently in both Python and Java).
+## MICRO-ROS
+micro-ROS is a robotic framework targeting embedded and deep-embedded robot components with extremely constrained computational resources. These devices have special characteristics: a minimum real-time operating system or no operating system, battery-powered, wireless low bandwidth connections, and intermittent operation with sleep periods.
 
 ## Installation of ROS
-
-ROS Noetic is now used by MARIO, and there are two ways to install it.
-Running `install_codes_jammy.sh` for 22.04 installs ROS Noetic via [Robostack](https://robostack.github.io/), whereas running `install_codes_focal.sh` for 20.04 installs ROS Noetic via the official ROS repository.
-
-`install_codes_jammy.sh` requires itself to be run twice, and run using the command `bash -i install_codes_jammy.sh`. The first time it is run, it will install the Robostack repository, and the second time it is run, it will install ROS Noetic and all the required packages.
+- Clone SRA-VJTI's MARIO repository on your system
+```bash 
+git clone --recursive https://github.com/SRA-VJTI/MARIO.git
+```
+- Change terminal directory inside the cloned repository
+```bash
+cd MARIO/
+```
+- Run the installation script
+```bash 
+./installation.sh
+```
