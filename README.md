@@ -2,7 +2,7 @@
 
 *MARIO* abbreviation for *Manipulator on ROS Based Input Output* is a bot with 3 Degree of Freedom. It consists of two SG90 micro servo and one MG995 metal gear servo motor. The servo motors are placed on base, elbow and shoulder enabling it with 3 Degrees of Freedom.
 
-## Sneek Peek 
+## Sneak Peek 
 
 
 <p align="center"><img src="assets/bot2.png"></p>
@@ -36,12 +36,12 @@
     └── README.md 
 
 ## Kinematics
-* Mario workshop aims to provide the basic knowledge about the DH parameters, forward kinematics , inverse kinematics.
+* MARIO workshop aims to provide the basic knowledge about the DH parameters, forward kinematics , inverse kinematics.
   * DH Parameters :- Denavit–Hartenberg parameters (also called DH parameters) are the four parameters associated with a particular convention for attaching reference frames to the links of a spatial kinematic chain, or robot manipulator
   * Forward Kinematics :- Forward kinematics refers to the use of the kinematic equations of a robot to compute the position of the end-effector from specified values for the joint parameters. The kinematics equations of the robot are used in robotics, computer games, and animation.
   * Inverse Kinematics :- inverse kinematics is the mathematical process of calculating the variable joint parameters needed to place the end of a kinematic chain, such as a robot manipulator or animation character's skeleton, in a given position and orientation relative to the start of the chain.
-## ROS 
-ROS is an open-source, meta-operating system for your robot. It provides the services you would expect from an operating system, 
+## ROS2 
+ROS2 is an open-source, meta-operating system for your robot. It provides the services you would expect from an operating system, 
 including hardware abstraction, low-level device control, implementation of commonly-used functionality, message-passing between processes,
 and package management.
 
@@ -49,7 +49,7 @@ and package management.
 Publish/Subscribe is a messaging pattern that aims to decouple the sending (Publisher) and receiving (Subscriber) party. A real world example could be a sport mobile app that shows you up-to-date information of a particular football game you're interested in. In this case you are the subscriber, as you express interest in this specific game. On the other side sits the publisher, which is an online reporter that feeds a system with the actual match data.
 This system, which is often referred as the message broker brings the two parties together by sending the new data to all interested subscribers.
 
-While ROS works on the same system, this system is also used in various other libraries like MQTT.
+While ROS2 works on the same system, this system is also used in various other libraries like MQTT.
 
 ## ESP-IDF
 ESP-IDF is the development framework for Espressif SoCs.The [SRA Board](https://github.com/SRA-VJTI/sra-board-hardware-design) uses ESP32 as microcontroller, hence ESPIDF is required
