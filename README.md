@@ -2,6 +2,8 @@
 
 *MARIO* abbreviation for *Manipulator on ROS Based Input Output* is a bot with 3 Degree of Freedom. It consists of two SG90 micro servo and one MG995 metal gear servo motor. The servo motors are placed on base, elbow and shoulder enabling it with 3 Degrees of Freedom.
 
+Given below are instructions for ROS2-Humble and micro-ROS installations. For ROS1 and Rosserial based MARIO, refer to the [following instructions](https://github.com/SRA-VJTI/MARIO/tree/noetic).
+
 ## Sneak Peek 
 
 
@@ -59,6 +61,7 @@ to code the ESP32. Examples included inside firmware directory has been written 
 micro-ROS is a robotic framework targeting embedded and deep-embedded robot components with extremely constrained computational resources. These devices have special characteristics: a minimum real-time operating system or no operating system, battery-powered, wireless low bandwidth connections, and intermittent operation with sleep periods.
 
 ## Installation of ROS
+
 - Clone SRA-VJTI's MARIO repository on your system
 ```bash 
 git clone --recursive https://github.com/SRA-VJTI/MARIO.git
