@@ -67,7 +67,7 @@ micro-ROS is a robotic framework targeting embedded and deep-embedded robot comp
 
 ## ESP-IDF
 ESP-IDF is the development framework for Espressif SoCs.The [SRA Board](https://github.com/SRA-VJTI/sra-board-hardware-design) uses ESP32 as microcontroller, hence ESPIDF is required
-to code the ESP32. Examples included inside firmware directory has been written in ESPIDF version 4.2 .
+to code the ESP32. Examples included inside firmware directory has been written in ESPIDF version 5.1 .
 
 ## Installation of ROS2
 
