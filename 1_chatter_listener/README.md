@@ -1,19 +1,34 @@
 # talker and listener 
-Steps to talker ans listener scripts :
-* If you haven't cloned the repo, clone the repo and rebuild the catkin workspace by following the instructions specified in the beginning.
-* Start `roscore` in a terminal.
+Steps to run talker and listener scripts :
+* To run the talker and listener first we need to copy the 1_chatter_listener to ros2_ws src
+
 ```
-source /opt/ros/noetic/setup.bash
-roscore
+cp -r /home/(user_name)/MARIO/1_chatter_listener /home/(user_name)/ros2_ws/src
 ```
-* Open another terminal to run `talker.py`
+* To build the necesarry packages we need to install them so for that go to ros2_ws
 ```
-source ~/catkin_ws/devel/setup.bash
-rosrun chatter_listener talker.py
+cd ros2_ws
 ```
-* Open another terminal to rub `listener.py`
+* Then to build run:
 ```
-source ~/catkin_ws/devel/setup.bash
-rosrun chatter_listener listener.py
+colcon build
 ```
-* To know more about it visit [this tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29)
+* Now we need to source it
+```
+source install/setup.bash
+```
+* Now run the talker
+```
+ros2 run chatter_listener talker.py
+```
+* To run the listener `open another terminal` and again source it:
+```
+source install/setup.bash
+```
+* Now run the listener
+```
+ros2 run chatter_listener listener.py
+```
+* TALKER AND LISTENER
+<p align="centere"><img src ="assets/talker_listener.gif" width="1500" height="900"></p>
+

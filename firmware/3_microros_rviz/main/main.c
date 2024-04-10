@@ -122,7 +122,8 @@ void micro_ros_task(void * arg)
   	memset(test_array,'z',ARRAY_LEN);
 	rcl_allocator_t allocator = rcl_get_default_allocator();
 	rclc_support_t support;
-
+	enable_servo();
+	
 	// Create init_options.
 	rcl_init_options_t init_options = rcl_get_zero_initialized_init_options();
 	RCCHECK(rcl_init_options_init(&init_options, allocator));
