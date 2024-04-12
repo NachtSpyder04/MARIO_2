@@ -73,7 +73,7 @@ to code the ESP32. Examples included inside firmware directory has been written 
 
 - Copy and execute the following command in your bash terminal 
 ```bash
-wget -O - https://gist.github.com/AryanNanda17/ecfee629cd5286447e1e9f2b6c33454d/raw/mario_install.sh | bash
+wget -O - https://raw.githubusercontent.com/SRA-VJTI/MARIO/humble/installations.sh | bash
 ```
 - As an alternative, you can also install the required packages on your local machine by following the instructions below.
 
