@@ -69,18 +69,24 @@ micro-ROS is a robotic framework targeting embedded and deep-embedded robot comp
 ESP-IDF is the development framework for Espressif SoCs.The [SRA Board](https://github.com/SRA-VJTI/sra-board-hardware-design) uses ESP32 as microcontroller, hence ESPIDF is required
 to code the ESP32. Examples included inside firmware directory has been written in ESPIDF version 5.1 .
 
-## Installation of ROS2
+## Installation of ROS2 and other dependencies 
 
-- Clone SRA-VJTI's MARIO repository on your system
-```bash 
-git clone --recursive https://github.com/SRA-VJTI/MARIO.git
-```
-- Change terminal directory inside the cloned repository
+- Copy and execute the following command in your bash terminal 
 ```bash
-cd MARIO/
+wget -O - https://gist.github.com/AryanNanda17/ecfee629cd5286447e1e9f2b6c33454d/raw/mario_install.sh | bash
 ```
-- Run the installation script
-```bash 
-./installation.sh
-```
+- As an alternative, you can also install the required packages on your local machine by following the instructions below.
+
+  - Clone SRA-VJTI's MARIO repository on your system
+  ```bash 
+  git clone --recursive https://github.com/SRA-VJTI/MARIO.git
+  ```
+  - Change terminal directory inside the cloned repository
+  ```bash
+  cd MARIO/
+  ```
+  - Run the installation script
+  ```bash 
+  ./installations.sh
+  ```
 
